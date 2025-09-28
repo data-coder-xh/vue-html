@@ -45,7 +45,7 @@
       <div class="section-title">
         <img class="icon" src="/icons/fa-code.svg" alt="" /> 项目经历
       </div>
-      <div class="entry" v-for="(proj, i) in projects" :key="i">
+      <div class="entry highlighttitle" v-for="(proj, i) in projects" :key="i">
         <div class="entry-top">
           <div class="entry-title">{{ proj.title }}</div>
           <div class="entry-right">{{ proj.time }}</div>
@@ -391,4 +391,35 @@ export default {
 .action-btn.delete:hover {
   background: #c9302c;
 }
+
+/* 高亮选中样式（更精致） */
+.entry.highlighttitle {
+  position: relative;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(38,38,125,0.08), #fff);
+  box-shadow: inset 0 0 6px rgba(38,38,125,0.15),
+              0 2px 6px rgba(0,0,0,0.06);
+  transition: all 0.25s ease;
+  padding: 6px 10px;
+}
+
+/* 左侧主题条 */
+.entry.highlighttitle::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: -4px;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, var(--theme-color), #4a4ad8);
+}
+
+/* hover 状态让它更有动效 */
+.entry.highlighttitle:hover {
+  box-shadow: inset 0 0 8px rgba(38,38,125,0.2),
+              0 4px 10px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+
 </style>
