@@ -50,6 +50,12 @@
           <div class="entry-title">{{ proj.title }}</div>
           <div class="entry-right">{{ proj.time }}</div>
         </div>
+          <!-- 操作按钮区 -->
+  <div class="entry-actions">
+    <button class="action-btn">编辑</button>
+    <button class="action-btn">AI对话</button>
+    <button class="action-btn delete">删除</button>
+  </div>
         <ul>
           <li v-for="(p, j) in proj.points" :key="j">
             <span class="point-title">{{ p.title }}：</span>
@@ -290,6 +296,7 @@ export default {
 
 /* 经历条目 */
 .entry {
+  position: relative; /* 让按钮能定位在右上角 */
   margin-bottom: 10px; /* 间距由条目撑开 */
 }
 .entry-top {
@@ -347,5 +354,41 @@ export default {
 .point-content {
   color: var(--text-sec);
   font-size: var(--font-desc);
+}
+
+.entry-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.entry:hover .entry-actions {
+  opacity: 1;
+}
+
+.action-btn {
+  background: var(--theme-color);
+  color: #fff;
+  border: none;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background: #444da7; /* hover 时稍微变浅 */
+}
+
+.action-btn.delete {
+  background: #d9534f; /* 删除按钮红色 */
+}
+
+.action-btn.delete:hover {
+  background: #c9302c;
 }
 </style>
