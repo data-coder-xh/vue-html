@@ -51,7 +51,10 @@
           <div class="entry-right">{{ proj.time }}</div>
         </div>
         <ul>
-          <li v-for="(p, j) in proj.points" :key="j">{{ p }}</li>
+          <li v-for="(p, j) in proj.points" :key="j">
+            <span class="point-title">{{ p.title }}：</span>
+            <span class="point-content">{{ p.content }}</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -137,17 +140,32 @@ export default {
           title: "AI 简历生成平台",
           time: "2024.03 – 2024.08",
           points: [
-            "负责前端架构设计，使用 Vue3 + Pinia 实现简历编辑与预览模块。",
-            "通过接口拆分和 Tree-Shaking，将页面加载时间优化约 30%。",
-            "实现基于 Puppeteer 的 PDF 导出功能，支持高分辨率排版。"
+            {
+              title: "前端架构设计",
+              content: "负责前端架构设计，使用 Vue3 + Pinia 实现简历编辑与预览模块。"
+            },
+            {
+              title: "性能优化",
+              content: "通过接口拆分和 Tree-Shaking，将页面加载时间优化约 30%。"
+            },
+            {
+              title: "PDF 导出功能",
+              content: "实现基于 Puppeteer 的 PDF 导出功能，支持高分辨率排版。"
+            }
           ]
         },
         {
           title: "流程管理系统",
           time: "2025.01 – 2025.03",
           points: [
-            "实现可视化流程设计器，支持节点拖拽与连线。",
-            "基于 Vue Router 动态权限控制，实现用户分级管理。"
+            {
+              title: "可视化流程设计器",
+              content: "实现可视化流程设计器，支持节点拖拽与连线。"
+            },
+            {
+              title: "动态权限控制",
+              content: "基于 Vue Router 动态权限控制，实现用户分级管理。"
+            }
           ]
         }
       ],
@@ -300,10 +318,12 @@ export default {
   font-size: var(--font-meta);
 }
 .entry li {
+  margin-left: 0; /* 确保 li 本身不再往里缩 */
   line-height: 1.4;
   font-size: var(--font-desc);
 }
 .entry ul {
+  padding-left: 20px; /* 保持 ul 内边距 */
   margin: 0;
 }
 .honors {
@@ -314,6 +334,18 @@ export default {
 /* 个人总结 */
 .summary {
   line-height: 1.4;
+  font-size: var(--font-desc);
+}
+
+.point-title {
+  font-weight: 600;
+  color: var(--theme-color);
+  margin-right: 4px;
+  font-size: var(--font-desc);
+}
+
+.point-content {
+  color: var(--text-sec);
   font-size: var(--font-desc);
 }
 </style>
