@@ -42,20 +42,21 @@
 
     <!-- 项目经历 -->
     <div class="section">
-      <div class="section-title">
+      <div class="section-title with-add-btn">
         <img class="icon" src="/icons/fa-code.svg" alt="" /> 项目经历
+        <span class="add-btn">+</span>
       </div>
-      <div class="entry highlighttitle" v-for="(proj, i) in projects" :key="i">
+      <div class="entry" v-for="(proj, i) in projects" :key="i">
         <div class="entry-top">
           <div class="entry-title">{{ proj.title }}</div>
           <div class="entry-right">{{ proj.time }}</div>
         </div>
           <!-- 操作按钮区 -->
-  <div class="entry-actions">
-    <button class="action-btn">编辑</button>
-    <button class="action-btn">AI对话</button>
-    <button class="action-btn delete">删除</button>
-  </div>
+         <div class="entry-actions">
+          <button class="action-btn">编辑</button>
+          <button class="action-btn">AI对话</button>
+          <button class="action-btn delete">删除</button>
+        </div>
         <ul>
           <li v-for="(p, j) in proj.points" :key="j">
             <span class="point-title">{{ p.title }}：</span>
@@ -77,7 +78,10 @@
         </div>
         <div class="entry-sub">{{ work.role }}</div>
         <ul>
-          <li v-for="(p, j) in work.points" :key="j">{{ p }}</li>
+          <li v-for="(p, j) in work.points" :key="j">
+            <span class="point-title">{{ p.title }}：</span>
+            <span class="point-content">{{ p.content }}</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -94,7 +98,10 @@
         </div>
         <div class="entry-sub">{{ other.sub }}</div>
         <ul>
-          <li v-for="(p, j) in other.points" :key="j">{{ p }}</li>
+          <li v-for="(p, j) in other.points" :key="j">
+            <span class="point-title">{{ p.title }}：</span>
+            <span class="point-content">{{ p.content }}</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -104,7 +111,7 @@
       <div class="section-title">
         <img class="icon" src="/icons/fa-lightbulb.svg" alt="" /> 个人总结
       </div>
-      <p class="summary">{{ summary }}</p>
+      <div class="summary">{{ summary }}</div>
     </div>
   </main>
 </template>
@@ -182,8 +189,14 @@ export default {
           time: "2024.07 – 至今",
           city: "广州",
           points: [
-            "负责前端页面搭建与交互优化，独立完成多个业务模块。",
-            "引入前端埋点与性能监控方案，提升问题定位效率。"
+            {
+              title: "前端页面搭建",
+              content: "负责前端页面搭建与交互优化，独立完成多个业务模块。"
+            },
+            {
+              title: "性能监控",
+              content: "引入前端埋点与性能监控方案，提升问题定位效率。"
+            }
           ]
         },
         {
@@ -192,8 +205,14 @@ export default {
           time: "2023.01 – 2023.12",
           city: "深圳",
           points: [
-            "负责内部管理系统的开发与维护。",
-            "推动代码 ESM 化，提升构建性能。"
+            {
+              title: "内部管理系统",
+              content: "负责内部管理系统的开发与维护。"
+            },
+            {
+              title: "代码 ESM 化",
+              content: "推动代码 ESM 化，提升构建性能。"
+            }
           ]
         }
       ],
@@ -202,13 +221,31 @@ export default {
           title: "某某开源社区贡献者",
           sub: "为开源项目提交代码与文档",
           time: "2023.05 – 2023.12",
-          points: ["优化前端组件库的文档与示例代码", "修复多处跨浏览器兼容性问题"]
+          points: [
+            {
+              title: "优化文档",
+              content: "优化前端组件库的文档与示例代码"
+            },
+            {
+              title: "修复兼容性问题",
+              content: "修复多处跨浏览器兼容性问题"
+            }
+          ]
         },
         {
           title: "校园技术社团成员",
           sub: "组织技术分享活动",
           time: "2022.09 – 2023.06",
-          points: ["主讲 Vue3 新特性", "组织 Hackathon 比赛"]
+          points: [
+            {
+              title: "主讲 Vue3 新特性",
+              content: "主讲 Vue3 新特性，组织技术分享活动。"
+            },
+            {
+              title: "组织 Hackathon 比赛",
+              content: "组织 Hackathon 比赛，邀请开发者参与。"
+            }
+          ]
         }
       ],
       summary:
@@ -225,7 +262,8 @@ export default {
   background: #fff;
   padding: 20px 24px;
 
-  --theme-color: #26267d;
+  --theme-color: var(--color-cv-gray);
+  --theme-filter: var(--filter-gray);
   --text-main: #222;
   --text-sec: #444;
   --gray: #666;
@@ -234,6 +272,14 @@ export default {
   --font-title: 16px;
   --font-desc: 12px;
   --font-meta: 11px;
+
+  --filter-red: invert(43%) sepia(15%) saturate(2127%) hue-rotate(345deg) brightness(95%) contrast(92%);
+  --filter-blue: invert(41%) sepia(94%) saturate(7486%) hue-rotate(183deg) brightness(92%) contrast(96%);
+  --filter-gray: invert(16%) sepia(8%) saturate(237%) hue-rotate(169deg) brightness(90%) contrast(90%);
+
+  --color-cv-red: #d97757;;
+  --color-cv-blue: #4183ff;
+  --color-cv-gray: #404040;
 }
 
 /* 模块外层 */
@@ -272,8 +318,7 @@ export default {
   height: 14px;
   vertical-align: -2px;
   margin-right: 3px;
-  filter: brightness(0) saturate(100%) invert(18%) sepia(93%) saturate(2060%)
-    hue-rotate(218deg) brightness(90%) contrast(94%);
+  filter: var(--theme-filter);
 }
 
 .photo img {
@@ -420,6 +465,43 @@ export default {
   box-shadow: inset 0 0 8px rgba(38,38,125,0.2),
               0 4px 10px rgba(0,0,0,0.08);
   transform: translateY(-2px);
+}
+
+/* 通用标题容器：保持标题靠左，右侧预留空间给 + 号 */
+.with-add-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 不再拉开两端，标题靠左 */
+  padding-right: 24px;         /* 预留右侧空间，避免文字与 + 重叠 */
+}
+
+/* 默认隐藏的 + 按钮：绝对定位到标题右侧，垂直居中 */
+.with-add-btn .add-btn {
+  position: absolute;
+  left: 100px;                /* 离右边留点空隙 */
+  top: 40%;                  /* 垂直居中基准 */
+  transform: translateY(-50%); /* 精准垂直居中 */
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--theme-color);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  line-height: 1;
+}
+
+/* 悬停标题时显示 +，轻微放大 */
+.with-add-btn:hover .add-btn {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.2);
+}
+
+.summary {
+  line-height: 1.6;
+  font-size: var(--font-desc);
+  color: var(--text-sec);
+  white-space: pre-wrap; /* 保留换行和空格，适合多段总结 */
 }
 
 </style>
