@@ -105,6 +105,33 @@
         </ul>
       </div>
     </div>
+<!-- 其他 -->
+<div class="section">
+  <div class="section-title">
+    <img class="icon" src="/icons/fa-star.svg" alt="" /> 其他
+  </div>
+  <!-- 新增 entry 容器 -->
+  <div class="entry">
+    <div class="other-item">
+      <div class="other-label">技能</div>
+      <div class="other-content">{{ othersInfo.skills }}</div>
+    </div>
+    <div class="other-item">
+      <div class="other-label">证书 / 执照</div>
+      <div class="other-content">{{ othersInfo.certificates }}</div>
+    </div>
+    <div class="other-item">
+      <div class="other-label">语言</div>
+      <div class="other-content">{{ othersInfo.languages }}</div>
+    </div>
+    <div class="other-item">
+      <div class="other-label">兴趣爱好</div>
+      <div class="other-content">{{ othersInfo.hobbies }}</div>
+    </div>
+  </div>
+</div>
+
+
 
     <!-- 个人总结 -->
     <div class="section">
@@ -249,7 +276,13 @@ export default {
         }
       ],
       summary:
-        "具备扎实的计算机基础与项目实践能力，专注于前端开发与性能优化，能够独立完成项目模块开发与调优。热衷开源与新技术学习，具备较强的团队协作与沟通能力。"
+        "具备扎实的计算机基础与项目实践能力，专注于前端开发与性能优化，能够独立完成项目模块开发与调优。热衷开源与新技术学习，具备较强的团队协作与沟通能力。",
+      othersInfo: {
+        skills: "Vue3, React, Node.js, Express, MongoDB, MySQL, Git",
+        certificates: "CCNA, AWS Certified Solutions Architect",
+        languages: "中文（母语）, 英文（流利）, 日文（基础）",
+        hobbies: "旅游, 运动（足球, 篮球）, 阅读"
+      }
     };
   }
 };
@@ -502,6 +535,35 @@ export default {
   font-size: var(--font-desc);
   color: var(--text-sec);
   white-space: pre-wrap; /* 保留换行和空格，适合多段总结 */
+}
+
+/* 其他模块整体条目 */
+.other-item {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* 左侧小标签 */
+.other-label {
+  min-width: 72px;
+  font-weight: 700;
+  color: var(--theme-color);
+  font-size: var(--font-meta);
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(65, 131, 255, 0.1); /* 浅蓝底作为区分 */
+  text-align: center;
+}
+
+/* 右侧内容 */
+.other-content {
+  flex: 1;
+  font-size: var(--font-desc);
+  color: var(--text-sec);
+  line-height: 1.6;
+  word-break: break-word; /* 防止长词溢出 */
 }
 
 </style>
