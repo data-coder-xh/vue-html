@@ -1,6 +1,29 @@
-body {
-  margin: 0;
-  width: 100vw;
-  height: 100vh;
+:root {
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+  color: #1d2b50;
+  background-color: #f5f7fb;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+main {
+  width: 100%;
+}
